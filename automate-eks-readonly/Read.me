@@ -1,0 +1,53 @@
+./argument-update.sh <EKS_CLUSTER_NAME> <IAM_USER_NAME> <AWS_REGION>
+This Bash script automates the setup process for an AWS EKS (Elastic Kubernetes Service) environment by creating an IAM user, generating IAM access keys, creating IAM policies, and configuring AWS CLI and kubectl for the specified EKS cluster.
+
+./setup-eks.sh <EKS_CLUSTER_NAME> <IAM_USER_NAME> <AWS_REGION>
+Arguments:
+
+<EKS_CLUSTER_NAME>: The name of the EKS cluster.
+<IAM_USER_NAME>: The desired IAM user name.
+<AWS_REGION>: The AWS region where the EKS cluster is located.
+
+
+Script Steps:
+
+1. Input Validation:
+
+Checks if the script is provided with the correct number of arguments.
+2. Variable Assignment:
+
+3. Assigns command-line arguments to variables.
+Defines remaining variables such as file paths and default password.
+4. Create or Get IAM User:
+
+Checks if the IAM user already exists, if not, creates a new IAM user with the specified user name.
+5.  Create or Update IAM Access Keys:
+
+Creates or updates IAM access keys for the IAM user.
+6.  Install jq (if not installed):
+
+Installs the jq JSON processor if it's not already installed on the system.
+7.  Create IAM Policy:
+
+Creates an IAM policy based on the specified policy file.
+8.  Attach Policy to IAM User:
+
+Attaches the created IAM policy to the IAM user.
+9.  Update EKS aws-auth ConfigMap:
+
+Configures IAM identity mapping for the IAM user in the EKS aws-auth ConfigMap.
+10. Create EKS Cluster Role Binding:
+
+Applies the EKS Cluster Role Binding configuration.
+11.  Update ClusterRoleBinding YAML:
+
+Updates the ClusterRoleBinding YAML file with the IAM user name.
+12. Switch to IAM User and Configure AWS CLI:
+
+Switches to the IAM user and configures AWS CLI with the generated IAM access keys.
+13. Configure kubectl:
+
+14. Installs the AWS CLI if not installed.
+Configures kubectl with the IAM user's credentials for accessing the EKS cluster.
+
+Note: Ensure that you have the necessary permissions and credentials configured to execute the AWS CLI commands and interact with the specified EKS cluster
